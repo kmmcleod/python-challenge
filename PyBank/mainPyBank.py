@@ -20,7 +20,7 @@ with open(csvpath, newline='') as csvfile:
     # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    #print(csvreader)
+    print(csvreader)
 
     # Skip header
     header=next(csvreader)
@@ -34,22 +34,22 @@ with open(csvpath, newline='') as csvfile:
     previous_profit=int(first_row[1])
     previous_loss=int(first_row[1])
 
-#Read through each row of data after the header
+# Read through each row of data after the header
     for row in csvreader:
         total_months=total_months+1
         total_net=total_net+int(row[1])
-        #Calculate net change
+        # Calculate net change
         net_change=int(row[1])-previous_net
         previous_net=int(row[1])
         net_change_list=net_change_list+[net_change]
         month_of_change=month_of_change+[row[0]]
-        #Calculate greatest increase in profits
+        # Calculate greatest increase in profits
         profit_increase_change=int(row[1])-previous_profit
         previous_profit=int(row[1])
         if profit_increase_change > g_increase_value:
             g_increase_value = profit_increase_change
             g_increase_month = row[0]
-        #Calculate greatest decrease in losses
+        # Calculate greatest decrease in losses
         loss_decrease_change=int(row[1])-previous_loss
         previous_loss=int(row[1])
         if loss_decrease_change < g_decrease_value:
